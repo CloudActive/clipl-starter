@@ -1,22 +1,22 @@
 import React from 'react';
 import Button from '@clipl-starter/button';
-import { useLazyQuery, useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
+import { gql, useLazyQuery, useQuery } from '@apollo/client';
 
-const getAuthorDetails = gql`
+const getUserDetails = gql`
   query ($name: String) {
-    author(name: $name) {
+    users(where: { name: { equals: $name } }) {
       name
-      books {
+      email
+      posts {
         title
       }
     }
   }
 `;
 
-const getAuthors = gql`
+const getUsers = gql`
   query {
-    authors {
+    users {
       name
     }
   }
@@ -33,10 +33,10 @@ const Preamble = () => (
 );
 
 function HomePage() {
-  const { data: authorList, initialLoading, initialError } = useQuery(getAuthors);
-  const [getAuthor, { loading, error, data }] = useLazyQuery(getAuthorDetails);
+  const { data: userList, loading: initialLoading, error: initialError } = useQuery(getUsers);
+  const [getUser, { loading, error, data }] = useLazyQuery(getUserDetails);
 
-  if (!authorList) {
+  if (!userList) {
     return null;
   }
 
@@ -51,12 +51,12 @@ function HomePage() {
         As a treat, we've got some cool author recs Click on an author to see some of their books:
       </h2>
       <div>
-        {authorList.authors.map(({ name }) => (
+        {userList.users.map(({ name }) => (
           <Button
             key={name}
-            isSelected={data && data.author.name === name}
+            isSelected={data && data.users[0]?.name === name}
             onClick={() => {
-              getAuthor({ variables: { name } });
+              getUser({ variables: { name } });
             }}
           >
             {name}
@@ -67,7 +67,7 @@ function HomePage() {
         {data ? (
           <div>
             <ul>
-              {data.author.books.map(({ title }) => (
+              {data.users[0]?.posts.map(({ title }) => (
                 <li style={{ listStyle: 'none' }} key={title}>
                   {title}
                 </li>

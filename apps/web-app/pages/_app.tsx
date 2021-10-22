@@ -1,8 +1,13 @@
 import React from 'react';
+import getConfig from 'next/config';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
+const {
+  publicRuntimeConfig: { serverUrl },
+} = getConfig();
+
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/',
+  uri: `${serverUrl}/api/graphql`,
   cache: new InMemoryCache(),
 });
 

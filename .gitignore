@@ -106,5 +106,5 @@ dist
 .tern-port
 
 # keystone exclusions
-.keystone/admin
+**/**/.keystone/admin
 keystone.db

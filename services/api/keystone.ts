@@ -1,3 +1,4 @@
+import 'dotenv/config';
 /*
 Welcome to Keystone! This file is what keystone uses to start the app.
 
@@ -17,6 +18,9 @@ import { withAuth, session } from './auth';
 export default withAuth(
   // Using the config function helps typescript guide you to the available options.
   config({
+    server: {
+      port: Number(process.env.PORT) || 8100,
+    },
     // the db sets the database provider - we're using sqlite for the fastest startup experience
     db: {
       provider: 'sqlite',
