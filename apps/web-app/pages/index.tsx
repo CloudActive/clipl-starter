@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../../../packages/button/src';
+import Button from '@clipl-starter/button';
 import { gql, useLazyQuery, useQuery } from '@apollo/client';
 
 const getUserDetails = gql`
