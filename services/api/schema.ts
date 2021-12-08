@@ -95,8 +95,8 @@ export const lists = {
       author: relationship({
         ref: 'User.posts',
         ui: {
-          // displayMode: 'cards',
-          // cardFields: ['name', 'email'],
+          displayMode: 'cards',
+          cardFields: ['name', 'email'],
           inlineEdit: { fields: ['name', 'email'] },
           linkToItem: true,
           inlineCreate: { fields: ['name', 'email'] },
@@ -106,8 +106,8 @@ export const lists = {
       tags: relationship({
         ref: 'Tag.posts',
         ui: {
-          // displayMode: 'cards',
-          // cardFields: ['name'],
+          displayMode: 'cards',
+          cardFields: ['name'],
           inlineEdit: { fields: ['name'] },
           linkToItem: true,
           inlineConnect: true,
