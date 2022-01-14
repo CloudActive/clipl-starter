@@ -19,7 +19,7 @@ import { list } from '@keystone-6/core';
 
 // We're using some common fields in the starter. Check out https://keystonejs.com/docs/apis/fields#fields-api
 // for the full list of fields.
-import { text, relationship, password, timestamp, select } from '@keystone-6/core/fields';
+import { text, relationship, password, timestamp, select, image } from '@keystone-6/core/fields';
 // The document field is a more complicated field, so it's in its own package
 // Keystone aims to have all the base field types, but you can make your own
 // custom ones.
@@ -89,6 +89,10 @@ export const lists = {
         links: true,
         dividers: true,
       }),
+      image: image({
+        ui: { views: require.resolve('./admin/fields/images/views/index.tsx') }
+      }),
+      gallery: relationship({ ref: 'Gallery', many: true }),
       publishDate: timestamp(),
       // Here is the link from post => author.
       // We've configured its UI display quite a lot to make the experience of editing posts better.
@@ -125,6 +129,12 @@ export const lists = {
     fields: {
       name: text(),
       posts: relationship({ ref: 'Post.tags', many: true }),
+    },
+  }),
+  Gallery: list({
+    fields: {
+      name: text(),
+      image: image(),
     },
   }),
 };

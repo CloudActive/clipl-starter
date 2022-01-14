@@ -20,14 +20,21 @@ model User {
 }
 
 model Post {
-  id          String    @id @default(cuid())
-  title       String    @default("")
-  status      String?   @default("draft")
-  content     String    @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
-  publishDate DateTime?
-  author      User?     @relation("Post_author", fields: [authorId], references: [id])
-  authorId    String?   @map("author")
-  tags        Tag[]     @relation("Post_tags")
+  id              String    @id @default(cuid())
+  title           String    @default("")
+  status          String?   @default("draft")
+  content         String    @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  image_filesize  Int?
+  image_extension String?
+  image_width     Int?
+  image_height    Int?
+  image_mode      String?
+  image_id        String?
+  gallery         Gallery[] @relation("Post_gallery")
+  publishDate     DateTime?
+  author          User?     @relation("Post_author", fields: [authorId], references: [id])
+  authorId        String?   @map("author")
+  tags            Tag[]     @relation("Post_tags")
 
   @@index([authorId])
 }
@@ -36,4 +43,16 @@ model Tag {
   id    String @id @default(cuid())
   name  String @default("")
   posts Post[] @relation("Post_tags")
+}
+
+model Gallery {
+  id                String  @id @default(cuid())
+  name              String  @default("")
+  image_filesize    Int?
+  image_extension   String?
+  image_width       Int?
+  image_height      Int?
+  image_mode        String?
+  image_id          String?
+  from_Post_gallery Post[]  @relation("Post_gallery")
 }

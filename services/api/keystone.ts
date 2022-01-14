@@ -31,6 +31,13 @@ export default withAuth(
       // For our starter, we check that someone has session data before letting them see the Admin UI.
       isAccessAllowed: context => !!context.session?.data,
     },
+    images: {
+      upload: 'local',
+      local: {
+        baseUrl: '/images',
+        storagePath: 'public/images',
+      }
+    },
     lists,
     session,
   })
