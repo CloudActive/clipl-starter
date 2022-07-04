@@ -2,8 +2,9 @@
 // Modify your Keystone config when you want to change this.
 
 datasource sqlite {
-  url      = env("DATABASE_URL")
-  provider = "sqlite"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  provider          = "sqlite"
 }
 
 generator client {
@@ -12,11 +13,28 @@ generator client {
 }
 
 model User {
-  id       String @id @default(cuid())
-  name     String @default("")
-  email    String @unique @default("")
-  password String
-  posts    Post[] @relation("Post_author")
+  id                  String    @id @default(cuid())
+  name                String    @default("")
+  email               String    @unique @default("")
+  password            String
+  posts               Post[]    @relation("Post_author")
+  updatedAt           DateTime? @updatedAt
+  createdAt           DateTime? @default(now())
+  updatedBy           User?     @relation("User_updatedBy", fields: [updatedById], references: [id])
+  updatedById         String?   @map("updatedBy")
+  createdBy           User?     @relation("User_createdBy", fields: [createdById], references: [id])
+  createdById         String?   @map("createdBy")
+  from_User_updatedBy User[]    @relation("User_updatedBy")
+  from_User_createdBy User[]    @relation("User_createdBy")
+  from_Post_updatedBy Post[]    @relation("Post_updatedBy")
+  from_Post_createdBy Post[]    @relation("Post_createdBy")
+  from_Tag_updatedBy  Tag[]     @relation("Tag_updatedBy")
+  from_Tag_createdBy  Tag[]     @relation("Tag_createdBy")
+
+  @@index([updatedAt])
+  @@index([createdAt])
+  @@index([updatedById])
+  @@index([createdById])
 }
 
 model Post {
@@ -28,12 +46,33 @@ model Post {
   author      User?     @relation("Post_author", fields: [authorId], references: [id])
   authorId    String?   @map("author")
   tags        Tag[]     @relation("Post_tags")
+  updatedAt   DateTime? @updatedAt
+  createdAt   DateTime? @default(now())
+  updatedBy   User?     @relation("Post_updatedBy", fields: [updatedById], references: [id])
+  updatedById String?   @map("updatedBy")
+  createdBy   User?     @relation("Post_createdBy", fields: [createdById], references: [id])
+  createdById String?   @map("createdBy")
 
   @@index([authorId])
+  @@index([updatedAt])
+  @@index([createdAt])
+  @@index([updatedById])
+  @@index([createdById])
 }
 
 model Tag {
-  id    String @id @default(cuid())
-  name  String @default("")
-  posts Post[] @relation("Post_tags")
+  id          String    @id @default(cuid())
+  name        String    @default("")
+  posts       Post[]    @relation("Post_tags")
+  updatedAt   DateTime? @updatedAt
+  createdAt   DateTime? @default(now())
+  updatedBy   User?     @relation("Tag_updatedBy", fields: [updatedById], references: [id])
+  updatedById String?   @map("updatedBy")
+  createdBy   User?     @relation("Tag_createdBy", fields: [createdById], references: [id])
+  createdById String?   @map("createdBy")
+
+  @@index([updatedAt])
+  @@index([createdAt])
+  @@index([updatedById])
+  @@index([createdById])
 }
