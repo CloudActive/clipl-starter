@@ -5,7 +5,7 @@
   "main": "dist/clipl-starter-button.cjs.js",
   "module": "dist/clipl-starter-button.esm.js",
   "dependencies": {
-    "react": "^17.0.2"
+    "react": "^18.2.0"
   },
   "repository": "https://github.com/CloudActive/clipl-starter/tree/master/packages/button"
 }
