@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/globals.css'
 import getConfig from 'next/config';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
