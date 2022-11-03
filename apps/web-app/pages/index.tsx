@@ -1,7 +1,12 @@
 import React, { useRef } from 'react';
 import { Carousel } from '@mantine/carousel';
+import 'swiper/swiper-bundle.min.css';
+import 'swiper/swiper.min.css';
+import SwiperCore, { Autoplay, EffectCoverflow, Navigation, Pagination } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Switch } from '@mantine/core';
 
-
+SwiperCore.use([EffectCoverflow, Pagination]);
 function HomePage() {
   return (
     <>
@@ -68,7 +73,9 @@ function HomePage() {
             marginTop: '300px',
           }}
         >
-          Watch intro video
+          Watch <br />
+          intro <br />
+          video
         </div>
         <img
           src="https://agon-nextjs.vercel.app/assets/imgs/page/homepage1/banner.png"
@@ -632,19 +639,26 @@ function HomePage() {
             padding: '120px',
           }}
         > */}
-        <Carousel
-          withIndicators
-          // height={200}
-          // slideSize="33.333333%"
-          slideGap="md"
-          breakpoints={[
-            { maxWidth: 'md', slideSize: '50%' },
-            { maxWidth: 'sm', slideSize: '100%', slideGap: 0 },
-          ]}
-          loop
-          align="start"
+        <Swiper
+          effect={'coverflow'}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView={'auto'}
+          coverflowEffect={{
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: false,
+          }}
+          pagination={false}
+          className="mySwiper"
         >
-          <Carousel.Slide>
+          <SwiperSlide>
             <div
               style={{
                 backgroundColor: 'white',
@@ -681,8 +695,8 @@ function HomePage() {
                 firmament.
               </p>
             </div>
-          </Carousel.Slide>
-          <Carousel.Slide>
+          </SwiperSlide>
+          <SwiperSlide>
             <div
               style={{
                 backgroundColor: 'white',
@@ -719,8 +733,8 @@ function HomePage() {
                 firmament.
               </p>
             </div>
-          </Carousel.Slide>
-          <Carousel.Slide>
+          </SwiperSlide>
+          <SwiperSlide>
             <div
               style={{
                 backgroundColor: 'white',
@@ -757,8 +771,8 @@ function HomePage() {
                 firmament.
               </p>
             </div>
-          </Carousel.Slide>
-          <Carousel.Slide>
+          </SwiperSlide>
+          <SwiperSlide>
             <div
               style={{
                 backgroundColor: 'white',
@@ -795,8 +809,8 @@ function HomePage() {
                 firmament.
               </p>
             </div>
-          </Carousel.Slide>
-        </Carousel>
+          </SwiperSlide>
+        </Swiper>
         {/* </div> */}
       </div>
       <div style={{ padding: '25px' }}>
@@ -1127,7 +1141,404 @@ function HomePage() {
           />
         </div>
       </div>
-      {/* <div>
+      <div style={{ backgroundColor: '#006d77', textAlign: 'center', padding: '20px' }}>
+        <h1
+          style={{
+            color: 'white',
+            fontFamily: 'Chivo,sans-serif',
+            fontSize: '44px',
+            fontWeight: '700',
+            lineHeight: '54px',
+            letterSpacing: '1%',
+          }}
+        >
+          Choose The Best Plan
+          <br />
+          That's For You
+        </h1>
+        <p
+          style={{
+            color: 'white',
+            fontSize: '16px',
+            lineHeight: '28px',
+            fontFamily: 'Noto Sans,sans-serif',
+            fontWeight: '500',
+          }}
+        >
+          Billed Monthly <Switch />
+          Billed Annually
+        </p>
+
+        <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+          <div
+            style={{
+              backgroundColor: 'white',
+              padding: '10px',
+              width: '280px',
+              borderRadius: '20px',
+            }}
+          >
+            <p
+              style={{
+                color: '#667085',
+                fontSize: '16px',
+                lineHeight: '28px',
+                fontFamily: 'Noto Sans,sans-serif',
+                fontWeight: '500',
+                letterSpacing: '1%',
+              }}
+            >
+              <span
+                style={{
+                  color: '#101828',
+                  fontFamily: 'Chivo,sans-serif',
+                  fontSize: '35px',
+                  fontWeight: '700',
+                  lineHeight: '38px',
+                }}
+              >
+                $50
+              </span>
+              /Month
+            </p>
+            <h1
+              style={{
+                color: '#101828',
+                fontFamily: 'Chivo,sans-serif',
+                fontSize: '28px',
+                fontWeight: '700',
+                lineHeight: '34px',
+              }}
+            >
+              Standard
+            </h1>
+            <p
+              style={{
+                color: '#667085',
+                fontSize: '16px',
+                lineHeight: '28px',
+                fontFamily: 'Noto Sans,sans-serif',
+                fontWeight: '500',
+                letterSpacing: '1%',
+              }}
+            >
+              All the basics for businesses that are just getting started.
+            </p>
+            <hr />
+            <ul className="list-package-feature">
+              <li
+                style={{
+                  color: '#667085',
+                  fontSize: '16px',
+                  lineHeight: '28px',
+                  fontFamily: 'Noto Sans,sans-serif',
+                  fontWeight: '500',
+                  letterSpacing: '1%',
+                }}
+              >
+                Unlimited updates
+              </li>
+              <li
+                style={{
+                  color: '#667085',
+                  fontSize: '16px',
+                  lineHeight: '28px',
+                  fontFamily: 'Noto Sans,sans-serif',
+                  fontWeight: '500',
+                  letterSpacing: '1%',
+                }}
+              >
+                Custom permissions
+              </li>
+              <li
+                className="uncheck"
+                style={{
+                  color: '#667085',
+                  fontSize: '16px',
+                  lineHeight: '28px',
+                  fontFamily: 'Noto Sans,sans-serif',
+                  fontWeight: '500',
+                  letterSpacing: '1%',
+                }}
+              >
+                Custom designs &amp; features
+              </li>
+              <li
+                className="uncheck"
+                style={{
+                  color: '#667085',
+                  fontSize: '16px',
+                  lineHeight: '28px',
+                  fontFamily: 'Noto Sans,sans-serif',
+                  fontWeight: '500',
+                  letterSpacing: '1%',
+                }}
+              >
+                Custom hashtags
+              </li>
+            </ul>
+            <button
+              style={{
+                backgroundColor: 'transparent',
+                height: '60px',
+                width: '200px',
+                borderWidth: '2px',
+                borderRadius: '20px',
+              }}
+            >
+              Get Started
+            </button>
+          </div>
+          <div
+            style={{
+              backgroundColor: 'white',
+              padding: '10px',
+              width: '280px',
+              borderRadius: '20px',
+            }}
+          >
+            <p
+              style={{
+                color: '#667085',
+                fontSize: '16px',
+                lineHeight: '28px',
+                fontFamily: 'Noto Sans,sans-serif',
+                fontWeight: '500',
+                letterSpacing: '1%',
+              }}
+            >
+              <span
+                style={{
+                  color: '#101828',
+                  fontFamily: 'Chivo,sans-serif',
+                  fontSize: '35px',
+                  fontWeight: '700',
+                  lineHeight: '38px',
+                }}
+              >
+                $50
+              </span>
+              /Month
+            </p>
+            <h1
+              style={{
+                color: '#101828',
+                fontFamily: 'Chivo,sans-serif',
+                fontSize: '28px',
+                fontWeight: '700',
+                lineHeight: '34px',
+              }}
+            >
+              Standard
+            </h1>
+            <p
+              style={{
+                color: '#667085',
+                fontSize: '16px',
+                lineHeight: '28px',
+                fontFamily: 'Noto Sans,sans-serif',
+                fontWeight: '500',
+                letterSpacing: '1%',
+              }}
+            >
+              All the basics for businesses that are just getting started.
+            </p>
+            <hr />
+            <ul className="list-package-feature">
+              <li
+                style={{
+                  color: '#667085',
+                  fontSize: '16px',
+                  lineHeight: '28px',
+                  fontFamily: 'Noto Sans,sans-serif',
+                  fontWeight: '500',
+                  letterSpacing: '1%',
+                }}
+              >
+                Unlimited updates
+              </li>
+              <li
+                style={{
+                  color: '#667085',
+                  fontSize: '16px',
+                  lineHeight: '28px',
+                  fontFamily: 'Noto Sans,sans-serif',
+                  fontWeight: '500',
+                  letterSpacing: '1%',
+                }}
+              >
+                Custom permissions
+              </li>
+              <li
+                
+                style={{
+                  color: '#667085',
+                  fontSize: '16px',
+                  lineHeight: '28px',
+                  fontFamily: 'Noto Sans,sans-serif',
+                  fontWeight: '500',
+                  letterSpacing: '1%',
+                }}
+              >
+                Custom designs &amp; features
+              </li>
+              <li
+                className="uncheck"
+                style={{
+                  color: '#667085',
+                  fontSize: '16px',
+                  lineHeight: '28px',
+                  fontFamily: 'Noto Sans,sans-serif',
+                  fontWeight: '500',
+                  letterSpacing: '1%',
+                }}
+              >
+                Custom hashtags
+              </li>
+            </ul>
+            <button
+              style={{
+                backgroundColor: 'transparent',
+                height: '60px',
+                width: '200px',
+                borderWidth: '2px',
+                borderRadius: '20px',
+              }}
+            >
+              Get Started
+            </button>
+          </div>
+          <div
+            style={{
+              backgroundColor: 'white',
+              padding: '10px',
+              width: '280px',
+              borderRadius: '20px',
+            }}
+          >
+            <p
+              style={{
+                color: '#667085',
+                fontSize: '16px',
+                lineHeight: '28px',
+                fontFamily: 'Noto Sans,sans-serif',
+                fontWeight: '500',
+                letterSpacing: '1%',
+              }}
+            >
+              <span
+                style={{
+                  color: '#101828',
+                  fontFamily: 'Chivo,sans-serif',
+                  fontSize: '35px',
+                  fontWeight: '700',
+                  lineHeight: '38px',
+                }}
+              >
+                $50
+              </span>
+              /Month
+            </p>
+            <h1
+              style={{
+                color: '#101828',
+                fontFamily: 'Chivo,sans-serif',
+                fontSize: '28px',
+                fontWeight: '700',
+                lineHeight: '34px',
+              }}
+            >
+              Standard
+            </h1>
+            <p
+              style={{
+                color: '#667085',
+                fontSize: '16px',
+                lineHeight: '28px',
+                fontFamily: 'Noto Sans,sans-serif',
+                fontWeight: '500',
+                letterSpacing: '1%',
+              }}
+            >
+              All the basics for businesses that are just getting started.
+            </p>
+            <hr />
+            <ul className="list-package-feature">
+              <li
+                style={{
+                  color: '#667085',
+                  fontSize: '16px',
+                  lineHeight: '28px',
+                  fontFamily: 'Noto Sans,sans-serif',
+                  fontWeight: '500',
+                  letterSpacing: '1%',
+                }}
+              >
+                Unlimited updates
+              </li>
+              <li
+                style={{
+                  color: '#667085',
+                  fontSize: '16px',
+                  lineHeight: '28px',
+                  fontFamily: 'Noto Sans,sans-serif',
+                  fontWeight: '500',
+                  letterSpacing: '1%',
+                }}
+              >
+                Custom permissions
+              </li>
+              <li
+                
+                style={{
+                  color: '#667085',
+                  fontSize: '16px',
+                  lineHeight: '28px',
+                  fontFamily: 'Noto Sans,sans-serif',
+                  fontWeight: '500',
+                  letterSpacing: '1%',
+                }}
+              >
+                Custom designs &amp; features
+              </li>
+              <li
+                
+                style={{
+                  color: '#667085',
+                  fontSize: '16px',
+                  lineHeight: '28px',
+                  fontFamily: 'Noto Sans,sans-serif',
+                  fontWeight: '500',
+                  letterSpacing: '1%',
+                }}
+              >
+                Custom hashtags
+              </li>
+            </ul>
+            <button
+              style={{
+                backgroundColor: 'transparent',
+                height: '60px',
+                width: '200px',
+                borderWidth: '2px',
+                borderRadius: '20px',
+              }}
+            >
+              Get Started
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        style={{
+          backgroundColor: '#fff3ea',
+          padding: '80px',
+          margin: '140px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          height: '400px',
+        }}
+      >
         <div>
           <p
             style={{
@@ -1151,14 +1562,56 @@ function HomePage() {
           >
             Subscribe our newsletter
           </h1>
-          <p>By clicking the button, you are agreeing with our</p>
-          <a> Term & Conditions</a>
+          <p
+            style={{
+              fontFamily: 'Noto Sans,sans-serif',
+              fontWeight: '400',
+              fontSize: '18px',
+              lineHeight: '28px',
+              letterSpacing: '0px',
+            }}
+          >
+            By clicking the button, you are agreeing with our
+          </p>
+          <a
+            style={{
+              fontFamily: 'Noto Sans,sans-serif',
+              fontWeight: '400',
+              fontSize: '18px',
+              lineHeight: '28px',
+              letterSpacing: '0px',
+              color: '#006d77',
+            }}
+          >
+            {' '}
+            Term & Conditions
+          </a>
           <form>
-            <input placeholder="Enter you mail ..." />
-            <button className="btn-send"></button>
+            <div style={{ display: 'flex', marginTop: '40px' }}>
+              <input
+                placeholder="Enter you mail ..."
+                style={{
+                  background: '#fff',
+                  width: '300px',
+                  height: '50px',
+                  borderRadius: '0px',
+                  borderWidth: '0px',
+                  marginBottom: '50px',
+                  padding: '20px',
+                  borderBottomLeftRadius: '40px',
+                  borderTopLeftRadius: '40px',
+                }}
+              />
+              <button className="btn-send"></button>
+            </div>
           </form>
         </div>
-      </div> */}
+        {/* <img src="https://agon-nextjs.vercel.app/assets/imgs/template/chart.png" style={{height:"200px",width:"200px",position:"absolute",bottom:"0",left:"0",zIndex:"2"}} /> */}
+        <img
+          src="https://agon-nextjs.vercel.app/assets/imgs/template/img-newsletter.png"
+          style={{ width: '400px', height: '500px', borderRadius: '20px' }}
+        />
+      </div>
       <div style={{ display: 'flex', justifyContent: 'space-between', padding: '20px' }}>
         <img src="https://agon-nextjs.vercel.app/assets/imgs/template/logo.svg" />
         <div style={{ display: 'flex' }}>
