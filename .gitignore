@@ -108,3 +108,4 @@ dist
 # keystone exclusions
 **/**/.keystone/admin
 keystone.db
+services/api/.keystone/

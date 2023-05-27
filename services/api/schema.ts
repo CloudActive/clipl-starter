@@ -16,7 +16,7 @@ A field: The individual bits of data on your list, each with its own type.
 // for putting in our config so we get useful errors. With typescript,
 // we get these even before code runs.
 import { list } from './lib';
-
+import { allowAll } from '@keystone-6/core/access';
 // We're using some common fields in the starter. Check out https://keystonejs.com/docs/apis/fields#fields-api
 // for the full list of fields.
 import { text, relationship, password, timestamp, select } from '@keystone-6/core/fields';
@@ -31,6 +31,7 @@ import { document } from '@keystone-6/fields-document';
 export const lists = {
   // Here we define the user list.
   User: list({
+    access: { operation: allowAll },
     // Here are the fields that `User` will have. We want an email and password so they can log in
     // a name so we can refer to them, and a way to connect users to posts.
     fields: {
@@ -58,6 +59,7 @@ export const lists = {
   // Our second list is the Posts list. We've got a few more fields here
   // so we have all the info we need for displaying posts.
   Post: list({
+    access: { operation: allowAll },
     fields: {
       title: text(),
       // Having the status here will make it easy for us to choose whether to display
@@ -93,17 +95,18 @@ export const lists = {
       // Here is the link from post => author.
       // We've configured its UI display quite a lot to make the experience of editing posts better.
       author: relationship({
-        ref: 'User.posts',       
+        ref: 'User.posts',
       }),
       // We also link posts to tags. This is a many <=> many linking.
       tags: relationship({
-        ref: 'Tag.posts',       
+        ref: 'Tag.posts',
         many: true,
       }),
     },
   }),
   // Our final list is the tag list. This field is just a name and a relationship to posts
   Tag: list({
+    access: { operation: allowAll },
     ui: {
       isHidden: true,
     },
